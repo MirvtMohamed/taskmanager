@@ -1,6 +1,5 @@
-package com.example.taskmanager.data
+package com.example.taskmanager.data.entities
 
-import android.system.Int64Ref
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -13,13 +12,13 @@ import androidx.room.Index
             entity = Project::class,
             parentColumns = ["id"],
             childColumns = ["projectId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.Companion.CASCADE
         ),
         ForeignKey(
             entity = Task::class,
             parentColumns = ["id"],
             childColumns = ["taskId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.Companion.CASCADE
         ),
     ],
     indices = [Index("taskId")]

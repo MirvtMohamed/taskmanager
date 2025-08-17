@@ -1,4 +1,4 @@
-package com.example.taskmanager.data
+package com.example.taskmanager.data.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -13,8 +13,8 @@ import java.util.Date
             entity = Project::class,
             parentColumns = ["id"],
             childColumns = ["projectId"],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
+            onDelete = ForeignKey.Companion.CASCADE,
+            onUpdate = ForeignKey.Companion.CASCADE
         )
     ],
     indices = [Index("projectId")]

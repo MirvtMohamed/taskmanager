@@ -2,12 +2,11 @@ package com.example.taskmanager.ui
 
 import androidx.lifecycle.*
 import androidx.lifecycle.asLiveData
-import com.example.taskmanager.data.Project
-import com.example.taskmanager.data.ProjectDao
-import com.example.taskmanager.data.Task
-import com.example.taskmanager.data.TaskDao
+import com.example.taskmanager.data.entities.Project
+import com.example.taskmanager.data.daos.ProjectDao
+import com.example.taskmanager.data.entities.Task
+import com.example.taskmanager.data.daos.TaskDao
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class ProjectViewModel(
     private val projectDao: ProjectDao,

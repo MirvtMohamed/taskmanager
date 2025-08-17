@@ -1,4 +1,4 @@
-package com.example.taskmanager.data
+package com.example.taskmanager.data.entities
 
 import androidx.room.Embedded
 import androidx.room.Junction

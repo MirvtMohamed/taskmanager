@@ -1,10 +1,9 @@
-package com.example.taskmanager.data
+package com.example.taskmanager.data.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-
 
 @Entity(
     tableName = "attachments",
@@ -13,8 +12,8 @@ import androidx.room.PrimaryKey
             entity = Task::class,
             parentColumns = ["id"],
             childColumns = ["taskId"],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
+            onDelete = ForeignKey.Companion.CASCADE,
+            onUpdate = ForeignKey.Companion.CASCADE
         )
     ],
     indices = [Index("taskId")]

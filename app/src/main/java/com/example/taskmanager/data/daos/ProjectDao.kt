@@ -1,4 +1,4 @@
-package com.example.taskmanager.data
+package com.example.taskmanager.data.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -8,11 +8,14 @@ import androidx.room.RawQuery
 import androidx.room.Transaction
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteQuery
+import com.example.taskmanager.data.entities.Project
+import com.example.taskmanager.data.entities.ProjectTaskCrossRef
+import com.example.taskmanager.data.entities.ProjectWithTasks
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProjectDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(project: Project): Long
 
     // 2.4 Suspend vs Flow
@@ -29,7 +32,7 @@ interface ProjectDao {
     suspend fun getProjectWithTasks(projectId: Int): List<ProjectWithTasks>
 
     // Link/unlink for cross-ref
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.Companion.IGNORE)
     suspend fun linkTaskToProject(crossRef: ProjectTaskCrossRef): Long
 
     @Query("DELETE FROM project_task_cross_ref WHERE projectId = :projectId AND taskId = :taskId")

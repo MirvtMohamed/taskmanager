@@ -1,6 +1,5 @@
-package com.example.taskmanager.data
+package com.example.taskmanager.data.entities
 
-import android.provider.ContactsContract
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -17,4 +16,3 @@ data class User(
     val name: String,
     val email: String
 )
-

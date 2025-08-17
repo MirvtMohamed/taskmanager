@@ -2,6 +2,11 @@ package com.example.taskmanager.data
 
 import android.content.Context
 import android.util.Log
+import com.example.taskmanager.data.entities.Attachment
+import com.example.taskmanager.data.entities.Project
+import com.example.taskmanager.data.entities.ProjectTaskCrossRef
+import com.example.taskmanager.data.entities.Task
+import com.example.taskmanager.data.entities.User
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.system.measureNanoTime
@@ -29,22 +34,50 @@ object SampleDataRunner {
 
             // 2) Insert Projects
             val ownerId = 1 // first user
-            val pWork = Project(title = "Android App", ownerId = ownerId, labels = listOf("android","room"))
+            val pWork = Project(
+                title = "Android App",
+                ownerId = ownerId,
+                labels = listOf("android", "room")
+            )
             val pDocs = Project(title = "Docs & Specs", ownerId = ownerId, labels = listOf("docs"))
             val p1Id = db.projectDao().insert(pWork).toInt()
             val p2Id = db.projectDao().insert(pDocs).toInt()
             Log.d(TAG_DB, "Inserted projects: $p1Id, $p2Id")
 
             // 3) Insert Tasks
-            val t1Id = db.taskDao().insert(Task(description = "Design schema", projectId = p1Id, dueDate = Date())).toInt()
-            val t2Id = db.taskDao().insert(Task(description = "Write DAO", projectId = p1Id, dueDate = null)).toInt()
-            val t3Id = db.taskDao().insert(Task(description = "Draft README", projectId = p2Id, dueDate = Date())).toInt()
+            val t1Id = db.taskDao().insert(
+                Task(
+                    description = "Design schema",
+                    projectId = p1Id,
+                    dueDate = Date()
+                )
+            ).toInt()
+            val t2Id = db.taskDao().insert(
+                Task(
+                    description = "Write DAO",
+                    projectId = p1Id,
+                    dueDate = null
+                )
+            ).toInt()
+            val t3Id = db.taskDao().insert(
+                Task(
+                    description = "Draft README",
+                    projectId = p2Id,
+                    dueDate = Date()
+                )
+            ).toInt()
             Log.d(TAG_DB, "Inserted tasks: $t1Id, $t2Id, $t3Id")
 
             // 4) Add Attachments
             db.attachmentDao().insertAll(listOf(
-                Attachment(filePath = "/storage/emulated/0/Android/data/app/images/schema.png", taskId = t1Id),
-                Attachment(filePath = "/storage/emulated/0/Android/data/app/docs/dao.pdf", taskId = t2Id)
+                Attachment(
+                    filePath = "/storage/emulated/0/Android/data/app/images/schema.png",
+                    taskId = t1Id
+                ),
+                Attachment(
+                    filePath = "/storage/emulated/0/Android/data/app/docs/dao.pdf",
+                    taskId = t2Id
+                )
             ))
             Log.d(TAG_DB, "Inserted attachments for t1/t2")
 
@@ -73,7 +106,13 @@ object SampleDataRunner {
             }
             // Trigger a change to prove flow emits
             delay(200)
-            db.projectDao().insert(Project(title = "New Ideas", ownerId = ownerId, labels = listOf("brainstorm")))
+            db.projectDao().insert(
+                Project(
+                    title = "New Ideas",
+                    ownerId = ownerId,
+                    labels = listOf("brainstorm")
+                )
+            )
             flowJob.join()
 
             // 8) Performance: @Query vs @RawQuery
