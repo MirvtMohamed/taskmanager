@@ -59,6 +59,10 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     // Viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
